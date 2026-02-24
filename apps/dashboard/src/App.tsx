@@ -1,11 +1,13 @@
-import { startTransition, useEffect, useState } from 'react';
+import { Fragment, startTransition, useEffect, useId, useRef, useState } from 'react';
 
-import type { HistoryData, LatestData, MetaData } from './types.js';
+import type { HistoryData, LatestData, LineageMetric, MetaData, Provenance } from './types.js';
 
 type LoadState =
   | { status: 'loading' }
   | { status: 'error'; message: string }
   | { status: 'ready'; latest: LatestData; history: HistoryData; meta: MetaData };
+
+type MetricKey = 'liveabilityScore' | 'transit' | 'wait' | 'weather' | 'air';
 
 function formatUtc(iso: string): string {
   return new Intl.DateTimeFormat('en-GB', {
@@ -22,6 +24,13 @@ function scoreTone(score: number): string {
   return 'bad';
 }
 
+function freshnessInfo(collectedAtUtc: string): { label: 'Fresh' | 'Stale' | 'Outdated'; className: string; ageMinutes: number } {
+  const ageMinutes = Math.max(0, (Date.now() - new Date(collectedAtUtc).getTime()) / 60000);
+  if (ageMinutes <= 30) return { label: 'Fresh', className: 'fresh', ageMinutes };
+  if (ageMinutes <= 120) return { label: 'Stale', className: 'stale', ageMinutes };
+  return { label: 'Outdated', className: 'outdated', ageMinutes };
+}
+
 function buildSparkline(points: HistoryData['points'], width: number, height: number): string {
   if (points.length === 0) return '';
   const last24h = points.slice(-96);
@@ -34,6 +43,203 @@ function buildSparkline(points: HistoryData['points'], width: number, height: nu
       return `${x.toFixed(2)},${y.toFixed(2)}`;
     })
     .join(' ');
+}
+
+function MetricLineagePopover({
+  metricKey,
+  label,
+  lineage
+}: {
+  metricKey: MetricKey;
+  label: string;
+  lineage: LineageMetric | undefined;
+}) {
+  const [open, setOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const panelId = useId();
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onPointerDown = (event: MouseEvent) => {
+      const target = event.target;
+      if (target instanceof Node && wrapperRef.current && !wrapperRef.current.contains(target)) {
+        setOpen(false);
+      }
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [open]);
+
+  if (!lineage) return null;
+
+  return (
+    <div
+      ref={wrapperRef}
+      className={`lineage-wrap ${open ? 'open' : ''}`}
+      onMouseEnter={() => setOpen(true)}
+      onFocus={() => setOpen(true)}
+    >
+      <button
+        type="button"
+        className="lineage-trigger"
+        aria-label={`Explain ${label} metric lineage`}
+        aria-expanded={open}
+        aria-controls={panelId}
+        onClick={() => setOpen(true)}
+        data-testid={`lineage-trigger-${metricKey}`}
+      >
+        How calculated
+      </button>
+      <div className="lineage-popover" id={panelId} role="dialog" aria-label={`${label} data lineage`}>
+          <div className="lineage-header">
+            <strong>{lineage.label}</strong>
+            <div className="lineage-badges">
+              {lineage.sources.map((source) => (
+                <span className="tiny-badge source" key={source}>{source}</span>
+              ))}
+              {lineage.fallbackUsed ? <span className="tiny-badge fallback">Fallback</span> : <span className="tiny-badge live">Live</span>}
+            </div>
+          </div>
+          <p className="lineage-desc">{lineage.description}</p>
+
+          <div className="lineage-section">
+            <h4>API query</h4>
+            {lineage.queries.length > 0 ? (
+              <ul>
+                {lineage.queries.map((query, index) => (
+                  <li key={`${query.url}-${index}`}>
+                    <code>{query.method} {query.url}</code>
+                    {query.note ? <small>{query.note}</small> : null}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="lineage-empty">This metric aggregates outputs from the other metrics and does not fetch APIs directly.</p>
+            )}
+          </div>
+
+          <div className="lineage-section">
+            <h4>Ingestion</h4>
+            <ol>
+              {lineage.ingestion.map((step) => <li key={step}>{step}</li>)}
+            </ol>
+          </div>
+
+          <div className="lineage-section">
+            <h4>Transforms</h4>
+            <ol>
+              {lineage.transforms.map((step) => <li key={step}>{step}</li>)}
+            </ol>
+          </div>
+
+          <div className="lineage-section">
+            <h4>Calculation</h4>
+            <ol>
+              {lineage.calculation.map((step) => <li key={step}>{step}</li>)}
+            </ol>
+          </div>
+
+          <div className="lineage-section">
+            <h4>Config used</h4>
+            <ul className="inline-paths">
+              {lineage.configReferences.map((ref) => <li key={ref}><code>{ref}</code></li>)}
+            </ul>
+          </div>
+
+          <div className="lineage-section">
+            <h4>Current outputs</h4>
+            <dl className="lineage-outputs">
+              {Object.entries(lineage.outputs).map(([key, value]) => (
+                <Fragment key={key}>
+                  <dt>{key}</dt>
+                  <dd>{value == null ? 'n/a' : String(value)}</dd>
+                </Fragment>
+              ))}
+            </dl>
+          </div>
+
+          {lineage.fallbackUsed ? (
+            <div className="lineage-section fallback-note">
+              <h4>Fallback</h4>
+              <p>{lineage.fallbackReason ?? 'Fallback path was used.'}</p>
+            </div>
+          ) : null}
+      </div>
+    </div>
+  );
+}
+
+function ProvenancePanel({ latest, meta }: { latest: LatestData; meta: MetaData }) {
+  const provenance: Provenance | undefined = meta.provenance ?? latest.provenance;
+  const freshness = freshnessInfo(latest.collectedAtUtc);
+  const shortSha = provenance?.gitCommitSha ? provenance.gitCommitSha.slice(0, 7) : null;
+  const sourceEntries = Object.entries(latest.sourceStatuses);
+
+  return (
+    <section className="panel provenance-panel" aria-labelledby="provenance-title">
+      <div className="panel-header">
+        <h2 id="provenance-title">Data Provenance</h2>
+        <p>This is a static site; data is collected server-side and written into <code>data/*.json</code> before deployment.</p>
+      </div>
+      <div className="provenance-grid">
+        <div className="provenance-card">
+          <span className="muted">Generated by</span>
+          <div>{provenance?.generatedBy === 'github-actions' ? 'GitHub Actions' : provenance?.generatedBy === 'local-cli' ? 'Local CLI' : 'Unavailable'}</div>
+          <small>Collector v{provenance?.collectorVersion ?? 'n/a'}</small>
+        </div>
+        <div className="provenance-card">
+          <span className="muted">Freshness</span>
+          <div className={`freshness-badge ${freshness.className}`} data-testid="freshness-badge">{freshness.label}</div>
+          <small>{Math.round(freshness.ageMinutes)} min since collection</small>
+        </div>
+        <div className="provenance-card">
+          <span className="muted">Commit</span>
+          <div title={provenance?.gitCommitSha ?? undefined}>{shortSha ?? 'n/a'}</div>
+          <small>{provenance?.gitRef ?? 'No git ref metadata'}</small>
+        </div>
+        <div className="provenance-card">
+          <span className="muted">Workflow run</span>
+          {provenance?.runUrl ? (
+            <a href={provenance.runUrl} target="_blank" rel="noreferrer" data-testid="workflow-run-link">Open Actions run</a>
+          ) : (
+            <div>n/a</div>
+          )}
+          <small>{provenance?.workflowName ?? 'No workflow metadata'}</small>
+        </div>
+      </div>
+      <div className="provenance-meta">
+        <div>
+          <span className="muted">Repository / actor</span>
+          <div>{provenance?.githubRepository ?? 'n/a'} {provenance?.githubActor ? `· ${provenance.githubActor}` : ''}</div>
+        </div>
+        <div>
+          <span className="muted">Collection timestamp (UTC)</span>
+          <div>{formatUtc(latest.collectedAtUtc)}</div>
+        </div>
+        <div>
+          <span className="muted">Build timestamp (UTC)</span>
+          <div>{formatUtc(meta.buildTimeUtc)}</div>
+        </div>
+      </div>
+      <div className="source-status-list" aria-label="Source statuses">
+        {sourceEntries.map(([source, status]) => (
+          <span key={source} className={`status-pill ${status}`}>{source}: {status}</span>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 function Chart({ history }: { history: HistoryData }) {
@@ -75,20 +281,27 @@ function Chart({ history }: { history: HistoryData }) {
 }
 
 function KpiTile({
+  metricKey,
   title,
   penalty,
   body,
-  detail
+  detail,
+  lineage
 }: {
+  metricKey: Exclude<MetricKey, 'liveabilityScore'>;
   title: string;
   penalty: number;
   body: string;
   detail: string;
+  lineage: LineageMetric | undefined;
 }) {
   return (
     <article className="panel kpi-tile">
       <div className="kpi-top">
-        <h3>{title}</h3>
+        <div className="metric-title-wrap">
+          <h3>{title}</h3>
+          <MetricLineagePopover metricKey={metricKey} label={title} lineage={lineage} />
+        </div>
         <div className="chip">Penalty {penalty}</div>
       </div>
       <p>{body}</p>
@@ -161,7 +374,10 @@ export function App() {
           <p className="hero-copy">Static dashboard powered by GitHub Actions collector runs and config-as-code scoring.</p>
         </div>
         <div className={`score-card ${tone}`} data-testid="score-card">
-          <span className="score-label">Liveability score</span>
+          <div className="metric-title-wrap score-title-wrap">
+            <span className="score-label">Liveability score</span>
+            <MetricLineagePopover metricKey="liveabilityScore" label="Liveability score" lineage={latest.lineage?.metrics.liveabilityScore} />
+          </div>
           <strong data-testid="liveability-score">{latest.liveabilityScore.toFixed(1)}</strong>
           <small>100 is best</small>
         </div>
@@ -182,30 +398,40 @@ export function App() {
         </div>
       </section>
 
+      <ProvenancePanel latest={latest} meta={meta} />
+
       <section className="kpi-grid" aria-label="KPI tiles">
         <KpiTile
+          metricKey="transit"
           title="Transit disruption"
           penalty={latest.kpis.transit.penalty}
           body={`${latest.kpis.transit.disruptedLines} disrupted lines across ${latest.kpis.transit.watchedLines} watched lines.`}
           detail={latest.whatChanged.topDisruptedLines[0] ? `Worst: ${latest.whatChanged.topDisruptedLines[0].line} (${latest.whatChanged.topDisruptedLines[0].status})` : 'No major disruptions detected.'}
+          lineage={latest.lineage?.metrics.transit}
         />
         <KpiTile
+          metricKey="wait"
           title="Commute wait"
           penalty={latest.kpis.wait.penalty}
           body={latest.kpis.wait.worstStopPoint ? `${latest.kpis.wait.worstStopPoint} is the worst watched stop.` : 'No arrivals available for watched stops.'}
           detail={latest.kpis.wait.medianMinutes != null ? `Median wait ${latest.kpis.wait.medianMinutes} min` : 'Median wait unavailable'}
+          lineage={latest.lineage?.metrics.wait}
         />
         <KpiTile
+          metricKey="weather"
           title="Weather discomfort"
           penalty={latest.kpis.weather.penalty}
           body={`Rain risk max ${latest.kpis.weather.maxRainProbabilityNext6h ?? 'n/a'}% in the next 6 hours.`}
           detail={`Temp ${latest.kpis.weather.representativeTempNext6h ?? 'n/a'}°C, wind ${latest.kpis.weather.maxWindSpeedNext6h ?? 'n/a'} km/h`}
+          lineage={latest.lineage?.metrics.weather}
         />
         <KpiTile
+          metricKey="air"
           title="Air quality"
           penalty={latest.kpis.air.penalty}
           body={`London-wide max AQI ${latest.kpis.air.maxIndex ?? 'n/a'} (${latest.kpis.air.band ?? 'unknown'}).`}
           detail={latest.whatChanged.airQuality.stationName ? `Observed at ${latest.whatChanged.airQuality.stationName}` : 'Station attribution unavailable'}
+          lineage={latest.lineage?.metrics.air}
         />
       </section>
 

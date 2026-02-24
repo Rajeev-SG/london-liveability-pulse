@@ -46,6 +46,14 @@ jobs:
       - name: Collect data (server-side)
         env:
           TFL_APP_KEY: ${{ secrets.TFL_APP_KEY }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_WORKFLOW: ${{ github.workflow }}
+          GITHUB_SERVER_URL: ${{ github.server_url }}
         run: pnpm -w collect
 
       - name: Verify (tests + typecheck)

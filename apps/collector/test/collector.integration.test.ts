@@ -12,15 +12,31 @@ import { makeValidConfig } from './helpers.js';
 describe('collector integration (mocked HTTP)', () => {
   beforeEach(() => {
     nock.disableNetConnect();
-    process.env.TFL_APP_ID = 'test-app-id';
     process.env.TFL_APP_KEY = 'test-app-key';
+    process.env.GITHUB_ACTIONS = 'true';
+    process.env.GITHUB_SHA = 'abcdef1234567890';
+    process.env.GITHUB_REF = 'refs/heads/main';
+    process.env.GITHUB_RUN_ID = '12345';
+    process.env.GITHUB_RUN_ATTEMPT = '2';
+    process.env.GITHUB_REPOSITORY = 'example/repo';
+    process.env.GITHUB_ACTOR = 'ci-user';
+    process.env.GITHUB_WORKFLOW = 'Collect data + Deploy dashboard (GitHub Pages)';
+    process.env.GITHUB_SERVER_URL = 'https://github.com';
   });
 
   afterEach(() => {
     nock.cleanAll();
     nock.enableNetConnect();
-    delete process.env.TFL_APP_ID;
     delete process.env.TFL_APP_KEY;
+    delete process.env.GITHUB_ACTIONS;
+    delete process.env.GITHUB_SHA;
+    delete process.env.GITHUB_REF;
+    delete process.env.GITHUB_RUN_ID;
+    delete process.env.GITHUB_RUN_ATTEMPT;
+    delete process.env.GITHUB_REPOSITORY;
+    delete process.env.GITHUB_ACTOR;
+    delete process.env.GITHUB_WORKFLOW;
+    delete process.env.GITHUB_SERVER_URL;
   });
 
   it('collects and writes latest/history/meta files', async () => {
@@ -74,14 +90,21 @@ describe('collector integration (mocked HTTP)', () => {
     expect(result.latest.kpis.transit.watchedLines).toBe(2);
     expect(result.latest.whatChanged.airQuality.maxIndex).toBe(4);
     expect(result.history.points).toHaveLength(1);
+    expect(result.latest.provenance.generatedBy).toBe('github-actions');
+    expect(result.latest.provenance.runUrl).toBe('https://github.com/example/repo/actions/runs/12345');
+    expect(result.latest.lineage.metrics.transit.queries[0]?.url).toContain('app_key=REDACTED');
+    expect(result.latest.lineage.metrics.transit.queries[0]?.url).not.toContain('test-app-key');
 
-    const latest = JSON.parse(await readFile(path.join(outDir, 'latest.json'), 'utf8')) as { liveabilityScore: number };
+    const latest = JSON.parse(await readFile(path.join(outDir, 'latest.json'), 'utf8')) as { liveabilityScore: number; provenance: { generatedBy: string }; lineage: { metrics: { wait: { queries: Array<{ url: string }> } } } };
     const history = JSON.parse(await readFile(path.join(outDir, 'history.json'), 'utf8')) as { points: unknown[] };
-    const meta = JSON.parse(await readFile(path.join(outDir, 'meta.json'), 'utf8')) as { sourceStatuses: Record<string, string> };
+    const meta = JSON.parse(await readFile(path.join(outDir, 'meta.json'), 'utf8')) as { sourceStatuses: Record<string, string>; provenance: { githubRunId: string | null } };
 
     expect(typeof latest.liveabilityScore).toBe('number');
+    expect(latest.provenance.generatedBy).toBe('github-actions');
+    expect(latest.lineage.metrics.wait.queries).toHaveLength(2);
     expect(history.points.length).toBe(1);
     expect(meta.sourceStatuses.tfl).toBe('ok');
+    expect(meta.provenance.githubRunId).toBe('12345');
     expect(nock.isDone()).toBe(true);
   });
 });

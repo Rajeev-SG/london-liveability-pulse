@@ -1,32 +1,32 @@
 {
   "schemaVersion": 1,
   "project": "London Liveability Pulse",
-  "collectedAtUtc": "2026-02-24T21:35:30.633Z",
-  "collectedAtLocal": "24 Feb 2026, 21:35:30",
+  "collectedAtUtc": "2026-02-24T22:23:43.261Z",
+  "collectedAtLocal": "24 Feb 2026, 22:23:43",
   "timezone": "Europe/London",
   "location": {
     "name": "Central London",
     "lat": 51.5074,
     "lon": -0.1278
   },
-  "liveabilityScore": 82.49,
+  "liveabilityScore": 81.66,
   "penalties": {
-    "transit": 1.11,
+    "transit": 1.94,
     "wait": 0,
     "weather": 8,
     "air": 10,
-    "weightedTotal": 17.51
+    "weightedTotal": 18.34
   },
   "kpis": {
     "transit": {
-      "penalty": 1.11,
-      "disruptedLines": 2,
+      "penalty": 1.94,
+      "disruptedLines": 3,
       "watchedLines": 18
     },
     "wait": {
       "penalty": 0,
-      "worstStopPoint": "King's Cross St Pancras",
-      "medianMinutes": 0.5
+      "worstStopPoint": "Euston",
+      "medianMinutes": 1.9
     },
     "weather": {
       "penalty": 8,
@@ -43,6 +43,11 @@
   "whatChanged": {
     "topDisruptedLines": [
       {
+        "line": "Northern",
+        "status": "Part Closure",
+        "severityPoints": 15
+      },
+      {
         "line": "Jubilee",
         "status": "Minor Delays",
         "severityPoints": 10
@@ -54,8 +59,8 @@
       }
     ],
     "worstStopPoint": {
-      "label": "King's Cross St Pancras",
-      "medianMinutes": 0.5
+      "label": "Euston",
+      "medianMinutes": 1.9
     },
     "maxRainProbabilityNext6h": 0,
     "airQuality": {
@@ -120,8 +125,8 @@
           "id": "northern",
           "name": "Northern",
           "mode": "tube",
-          "status": "Good Service",
-          "severityPoints": 0
+          "status": "Part Closure",
+          "severityPoints": 15
         },
         {
           "id": "piccadilly",
@@ -199,22 +204,22 @@
           "stopPointId": "940GZZLUKSX",
           "label": "King's Cross St Pancras",
           "nextArrivalsMinutes": [
-            0,
             0.5,
-            0.5
+            0.9,
+            1.4
           ],
-          "medianMinutes": 0.5,
+          "medianMinutes": 0.9,
           "penalty": 0
         },
         {
           "stopPointId": "940GZZLUEUS",
           "label": "Euston",
           "nextArrivalsMinutes": [
-            0.3,
-            0.3,
-            1
+            1.4,
+            1.9,
+            2.4
           ],
-          "medianMinutes": 0.3,
+          "medianMinutes": 1.9,
           "penalty": 0
         }
       ]
@@ -222,20 +227,20 @@
     "weather": {
       "next6h": {
         "time": [
-          "2026-02-24T21:00",
           "2026-02-24T22:00",
           "2026-02-24T23:00",
           "2026-02-25T00:00",
           "2026-02-25T01:00",
-          "2026-02-25T02:00"
+          "2026-02-25T02:00",
+          "2026-02-25T03:00"
         ],
         "temperature_2m": [
-          11.6,
           11.6,
           11.5,
           11.3,
           11,
-          10.7
+          10.7,
+          10.5
         ],
         "precipitation_probability": [
           0,
@@ -246,12 +251,12 @@
           0
         ],
         "wind_speed_10m": [
-          4.3,
           6.2,
           6.7,
           6.7,
           7.2,
-          7.5
+          7.5,
+          7.3
         ]
       },
       "maxRainProbability": 0,
@@ -274,6 +279,275 @@
     "openMeteo": "ok",
     "ergAirQuality": "ok",
     "fhrs": "disabled"
+  },
+  "provenance": {
+    "generatedBy": "github-actions",
+    "gitCommitSha": "db6f38a8dc573793b19f128ed47c8a0f1dc1bb94",
+    "gitRef": "refs/heads/main",
+    "githubRunId": "22371307595",
+    "githubRunAttempt": "1",
+    "githubRepository": "Rajeev-SG/london-liveability-pulse",
+    "githubActor": "Rajeev-SG",
+    "workflowName": "Collect data + Deploy dashboard (GitHub Pages)",
+    "runUrl": "https://github.com/Rajeev-SG/london-liveability-pulse/actions/runs/22371307595",
+    "collectorVersion": "0.1.0",
+    "sourcesRequested": {
+      "tfl": true,
+      "openMeteo": true,
+      "ergAirQuality": true,
+      "fhrs": false
+    }
+  },
+  "lineage": {
+    "generatedAtUtc": "2026-02-24T22:23:43.261Z",
+    "metrics": {
+      "liveabilityScore": {
+        "label": "Liveability score",
+        "description": "The overall score clamps 100 minus the weighted sum of transit, wait, weather, and air penalties.",
+        "sources": [
+          "tfl",
+          "openMeteo",
+          "ergAirQuality"
+        ],
+        "queries": [],
+        "ingestion": [
+          "Read already-computed penalties from transit, wait, weather, and air metric pipelines.",
+          "No collector warnings for this run."
+        ],
+        "transforms": [
+          "Compute weighted contributions using config.scoring.weights.*.",
+          "Sum weighted penalties to get weightedTotal."
+        ],
+        "calculation": [
+          "score = clamp(100 - (w_transit*P_transit + w_wait*P_wait + w_weather*P_weather + w_air*P_air), 0, 100)",
+          "Clamp ensures score remains in the 0–100 range."
+        ],
+        "configReferences": [
+          "scoring.weights.transit",
+          "scoring.weights.wait",
+          "scoring.weights.weather",
+          "scoring.weights.air"
+        ],
+        "outputs": {
+          "transitPenalty": 1.94,
+          "waitPenalty": 0,
+          "weatherPenalty": 8,
+          "airPenalty": 10,
+          "weightTransit": 1,
+          "weightWait": 1,
+          "weightWeather": 0.8,
+          "weightAir": 1,
+          "weightedTotal": 18.34,
+          "score": 81.66
+        },
+        "fallbackUsed": true,
+        "fallbackReason": "ERG air quality returned no parseable AQI values; using scoring.fallbacks.airPenalty=10"
+      },
+      "transit": {
+        "label": "Transit disruption",
+        "description": "TfL line status data is fetched, normalized into status severity points, and averaged across watched lines.",
+        "sources": [
+          "tfl"
+        ],
+        "queries": [
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status?app_key=REDACTED",
+            "note": "Combined line status request by mode"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/line/mode/tube/status?app_key=REDACTED",
+            "note": "Fallback line status request for mode=tube"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/line/mode/overground/status?app_key=REDACTED",
+            "note": "Fallback line status request for mode=overground"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/line/mode/dlr/status?app_key=REDACTED",
+            "note": "Fallback line status request for mode=dlr"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/line/mode/tflrail/status?app_key=REDACTED",
+            "note": "Fallback line status request for mode=tflrail"
+          }
+        ],
+        "ingestion": [
+          "Fetch TfL Unified API line status endpoint for configured modes.",
+          "Read line name/mode and first line status description (lineStatuses[0].statusSeverityDescription)."
+        ],
+        "transforms": [
+          "Watch list filter applied: none (all returned lines)",
+          "Map status text (e.g. Good Service, Minor Delays) to severity points from config.scoring.transitSeverityPoints.",
+          "Average severity points across watched lines to produce P_transit."
+        ],
+        "calculation": [
+          "Status text -> severity points using config.scoring.transitSeverityPoints.",
+          "P_transit = average(severity points across watched lines)."
+        ],
+        "configReferences": [
+          "sources.tfl.modes",
+          "sources.tfl.watchLines",
+          "scoring.transitSeverityPoints",
+          "scoring.fallbacks.transitPenalty"
+        ],
+        "outputs": {
+          "watchedLines": 18,
+          "disruptedLines": 3,
+          "penalty": 1.94
+        },
+        "fallbackUsed": false,
+        "fallbackReason": null
+      },
+      "wait": {
+        "label": "Commute wait",
+        "description": "TfL arrivals are collected for watched stop points, converted to minutes, reduced to next-3 arrivals, and scored by median wait bands.",
+        "sources": [
+          "tfl"
+        ],
+        "queries": [
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/StopPoint/940GZZLUKSX/arrivals?app_key=REDACTED",
+            "note": "Arrivals request for stopPointId=940GZZLUKSX"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/StopPoint/940GZZLUEUS/arrivals?app_key=REDACTED",
+            "note": "Arrivals request for stopPointId=940GZZLUEUS"
+          }
+        ],
+        "ingestion": [
+          "Fetch TfL arrivals endpoint for each configured StopPoint.",
+          "Extract arrival countdown values from timeToStation (seconds)."
+        ],
+        "transforms": [
+          "Sort arrivals ascending and keep next 3 predictions per stop.",
+          "Convert seconds to minutes (rounded to 0.1 min).",
+          "Compute median minutes per stop and average penalties across stops."
+        ],
+        "calculation": [
+          "Map each stop median wait to a penalty using config.scoring.waitPenaltyBands.",
+          "P_wait = average(stop penalties) across watched stop points."
+        ],
+        "configReferences": [
+          "sources.tfl.stopPoints",
+          "scoring.waitPenaltyBands",
+          "scoring.fallbacks.waitPenalty"
+        ],
+        "outputs": {
+          "watchedStops": 2,
+          "stopsWithArrivals": 2,
+          "worstStopPoint": "Euston",
+          "worstMedianMinutes": 1.9,
+          "penalty": 0
+        },
+        "fallbackUsed": false,
+        "fallbackReason": null
+      },
+      "weather": {
+        "label": "Weather discomfort",
+        "description": "Open-Meteo hourly arrays are sliced to the next 6 hours and scored for rain risk, temperature comfort, and wind discomfort.",
+        "sources": [
+          "openMeteo"
+        ],
+        "queries": [
+          {
+            "source": "openMeteo",
+            "method": "GET",
+            "url": "https://api.open-meteo.com/v1/forecast?latitude=51.5074&longitude=-0.1278&hourly=temperature_2m%2Cprecipitation_probability%2Cwind_speed_10m&forecast_hours=48&timezone=Europe%2FLondon",
+            "note": "Forecast request with configured hourly variables"
+          }
+        ],
+        "ingestion": [
+          "Fetch Open-Meteo /v1/forecast with configured hourly variables and timezone.",
+          "Extract hourly arrays for temperature_2m, precipitation_probability, and wind_speed_10m."
+        ],
+        "transforms": [
+          "Normalize hourly arrays and cap to forecastHours=48.",
+          "Slice next 6h window for metric calculations.",
+          "Derive max rain probability, representative temperature (first hour), and max wind speed."
+        ],
+        "calculation": [
+          "Rain penalty from config.scoring.weatherPenalty.rainBands (max precip probability next 6h).",
+          "Temperature penalty from config.scoring.weatherPenalty.tempComfort (ideal / shoulder / extreme ranges).",
+          "Wind penalty from config.scoring.weatherPenalty.windBands (max wind speed next 6h).",
+          "P_weather = rainPenalty + tempPenalty + windPenalty."
+        ],
+        "configReferences": [
+          "location.lat",
+          "location.lon",
+          "project.timezone",
+          "sources.openMeteo.hourlyVariables",
+          "scoring.weatherPenalty.rainBands",
+          "scoring.weatherPenalty.tempComfort",
+          "scoring.weatherPenalty.windBands",
+          "scoring.fallbacks.weatherPenalty"
+        ],
+        "outputs": {
+          "maxRainProbability": 0,
+          "representativeTemp": 11.6,
+          "maxWindSpeed": 7.5,
+          "rainPenalty": 0,
+          "tempPenalty": 8,
+          "windPenalty": 0,
+          "penalty": 8
+        },
+        "fallbackUsed": false,
+        "fallbackReason": null
+      },
+      "air": {
+        "label": "Air quality",
+        "description": "ERG London monitoring index data is scanned for AQI values across stations, then the maximum AQI is mapped to a configured penalty band.",
+        "sources": [
+          "ergAirQuality"
+        ],
+        "queries": [
+          {
+            "source": "ergAirQuality",
+            "method": "GET",
+            "url": "https://api.erg.ic.ac.uk/AirQuality/Hourly/MonitoringIndex/GroupName=London/Json",
+            "note": "ERG monitoring index request for group=London"
+          }
+        ],
+        "ingestion": [
+          "Fetch ERG hourly monitoring index JSON for the London group.",
+          "Recursively inspect payload for AQI/AirQualityIndex-style numeric fields and station names."
+        ],
+        "transforms": [
+          "Collect all parseable AQI values in the range 1..10.",
+          "Take the maximum AQI across London stations (conservative summary)."
+        ],
+        "calculation": [
+          "Map max AQI to penalty + band using config.scoring.airPenalty.",
+          "Fallback penalty may use config.scoring.fallbacks.airPenalty (10) when no parseable AQI exists."
+        ],
+        "configReferences": [
+          "sources.ergAirQuality.groupName",
+          "scoring.airPenalty",
+          "scoring.fallbacks.airPenalty"
+        ],
+        "outputs": {
+          "maxIndex": null,
+          "band": null,
+          "stationName": null,
+          "penalty": 10
+        },
+        "fallbackUsed": true,
+        "fallbackReason": "ERG air quality returned no parseable AQI values; using scoring.fallbacks.airPenalty=10"
+      }
+    }
   },
   "warnings": []
 }

@@ -1,3 +1,47 @@
+export type Provenance = {
+  generatedBy: 'github-actions' | 'local-cli';
+  gitCommitSha: string | null;
+  gitRef: string | null;
+  githubRunId: string | null;
+  githubRunAttempt: string | null;
+  githubRepository: string | null;
+  githubActor: string | null;
+  workflowName: string | null;
+  runUrl: string | null;
+  collectorVersion: string;
+  sourcesRequested: {
+    tfl: boolean;
+    openMeteo: boolean;
+    ergAirQuality: boolean;
+    fhrs: boolean;
+  };
+};
+
+export type LineageMetric = {
+  label: string;
+  description: string;
+  sources: string[];
+  queries: Array<{ source: string; method: 'GET'; url: string; note?: string }>;
+  ingestion: string[];
+  transforms: string[];
+  calculation: string[];
+  configReferences: string[];
+  outputs: Record<string, string | number | null>;
+  fallbackUsed: boolean;
+  fallbackReason: string | null;
+};
+
+export type LineagePayload = {
+  generatedAtUtc: string;
+  metrics: {
+    liveabilityScore: LineageMetric;
+    transit: LineageMetric;
+    wait: LineageMetric;
+    weather: LineageMetric;
+    air: LineageMetric;
+  };
+};
+
 export type LatestData = {
   project: string;
   collectedAtUtc: string;
@@ -41,6 +85,8 @@ export type LatestData = {
     airQuality: { maxIndex: number | null; band: string | null; penalty: number; stationName: string | null };
   };
   sourceStatuses: Record<string, string>;
+  provenance?: Provenance;
+  lineage?: LineagePayload;
   warnings: string[];
 };
 
@@ -58,4 +104,5 @@ export type MetaData = {
   buildTimeUtc: string;
   latestCollectedAtUtc: string;
   timezone: string;
+  provenance?: Provenance;
 };

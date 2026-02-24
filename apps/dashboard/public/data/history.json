@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-02-24T21:35:30.633Z",
+  "generatedAtUtc": "2026-02-24T22:23:43.261Z",
   "retentionDays": 7,
   "points": [
     {
@@ -988,6 +988,16 @@
       "score": 82.49,
       "penalties": {
         "transit": 1.11,
+        "wait": 0,
+        "weather": 8,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T22:23:43.261Z",
+      "score": 81.66,
+      "penalties": {
+        "transit": 1.94,
         "wait": 0,
         "weather": 8,
         "air": 10
