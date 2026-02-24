@@ -1,0 +1,64 @@
+name: Collect data + Deploy dashboard (GitHub Pages)
+
+on:
+  schedule:
+    # Every 15 minutes (UTC). GitHub scheduled workflows can run as often as every 5 minutes.
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: "9"
+
+      - name: Install
+        run: pnpm i --frozen-lockfile
+
+      - name: Validate config
+        run: pnpm -w validate:config
+
+      - name: Collect data (server-side)
+        env:
+          TFL_APP_KEY: ${{ secrets.TFL_APP_KEY }}
+        run: pnpm -w collect
+
+      - name: Verify (tests + typecheck)
+        run: pnpm -w verify
+
+      - name: Build dashboard
+        run: pnpm -w build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/dashboard/dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

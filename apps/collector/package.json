@@ -1,0 +1,25 @@
+{
+  "name": "@liveability/collector",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "validate:config": "tsx src/cli-validate-config.ts",
+    "collect": "tsx src/cli-collect.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src test",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "dotenv": "^16.4.7",
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.8",
+    "nock": "^14.0.1",
+    "tsx": "^4.19.2",
+    "vitest": "^3.0.8"
+  }
+}

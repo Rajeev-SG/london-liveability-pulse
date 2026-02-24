@@ -1,0 +1,24 @@
+{
+  "name": "london-liveability-pulse",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "validate:config": "pnpm --filter @liveability/collector validate:config",
+    "collect": "pnpm --filter @liveability/collector collect",
+    "dev": "pnpm --filter @liveability/dashboard dev",
+    "build": "pnpm --filter @liveability/dashboard build",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "lint": "pnpm -r --if-present lint",
+    "test": "pnpm -r --if-present test",
+    "e2e": "pnpm --filter @liveability/dashboard e2e",
+    "verify": "pnpm -w validate:config && pnpm -w typecheck && pnpm -w lint && pnpm -w test && pnpm -w build && pnpm -w e2e"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "eslint": "^9.20.0",
+    "globals": "^15.14.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.1"
+  }
+}

@@ -1,0 +1,997 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-02-24T21:35:30.633Z",
+  "retentionDays": 7,
+  "points": [
+    {
+      "tsUtc": "2026-02-23T12:00:00.000Z",
+      "score": 68,
+      "penalties": {
+        "transit": 18,
+        "wait": 12,
+        "weather": 17,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T12:15:00.000Z",
+      "score": 69.1,
+      "penalties": {
+        "transit": 17.9,
+        "wait": 12.6,
+        "weather": 17.5,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T12:30:00.000Z",
+      "score": 70.2,
+      "penalties": {
+        "transit": 17.8,
+        "wait": 13.1,
+        "weather": 18,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T12:45:00.000Z",
+      "score": 71.3,
+      "penalties": {
+        "transit": 17.5,
+        "wait": 13.7,
+        "weather": 18.5,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T13:00:00.000Z",
+      "score": 72.3,
+      "penalties": {
+        "transit": 17.1,
+        "wait": 14.2,
+        "weather": 18.9,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T13:15:00.000Z",
+      "score": 73.3,
+      "penalties": {
+        "transit": 16.7,
+        "wait": 14.6,
+        "weather": 19.4,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T13:30:00.000Z",
+      "score": 74.1,
+      "penalties": {
+        "transit": 16.2,
+        "wait": 15,
+        "weather": 19.8,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T13:45:00.000Z",
+      "score": 74.9,
+      "penalties": {
+        "transit": 15.6,
+        "wait": 15.4,
+        "weather": 20.2,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T14:00:00.000Z",
+      "score": 75.6,
+      "penalties": {
+        "transit": 14.9,
+        "wait": 15.6,
+        "weather": 20.6,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T14:15:00.000Z",
+      "score": 76.1,
+      "penalties": {
+        "transit": 14.3,
+        "wait": 15.8,
+        "weather": 20.9,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T14:30:00.000Z",
+      "score": 76.5,
+      "penalties": {
+        "transit": 13.6,
+        "wait": 16,
+        "weather": 21.2,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T14:45:00.000Z",
+      "score": 76.8,
+      "penalties": {
+        "transit": 13,
+        "wait": 16,
+        "weather": 21.5,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T15:00:00.000Z",
+      "score": 77,
+      "penalties": {
+        "transit": 12.3,
+        "wait": 16,
+        "weather": 21.7,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T15:15:00.000Z",
+      "score": 77,
+      "penalties": {
+        "transit": 11.8,
+        "wait": 15.8,
+        "weather": 21.8,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T15:30:00.000Z",
+      "score": 76.9,
+      "penalties": {
+        "transit": 11.2,
+        "wait": 15.6,
+        "weather": 21.9,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T15:45:00.000Z",
+      "score": 76.6,
+      "penalties": {
+        "transit": 10.8,
+        "wait": 15.4,
+        "weather": 22,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T16:00:00.000Z",
+      "score": 76.2,
+      "penalties": {
+        "transit": 10.4,
+        "wait": 15,
+        "weather": 22,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T16:15:00.000Z",
+      "score": 75.7,
+      "penalties": {
+        "transit": 10.2,
+        "wait": 14.6,
+        "weather": 22,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T16:30:00.000Z",
+      "score": 75,
+      "penalties": {
+        "transit": 10,
+        "wait": 14.2,
+        "weather": 21.9,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T16:45:00.000Z",
+      "score": 74.2,
+      "penalties": {
+        "transit": 10,
+        "wait": 13.7,
+        "weather": 21.7,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T17:00:00.000Z",
+      "score": 73.4,
+      "penalties": {
+        "transit": 10.1,
+        "wait": 13.1,
+        "weather": 21.5,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T17:15:00.000Z",
+      "score": 72.4,
+      "penalties": {
+        "transit": 10.3,
+        "wait": 12.6,
+        "weather": 21.3,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T17:30:00.000Z",
+      "score": 71.4,
+      "penalties": {
+        "transit": 10.5,
+        "wait": 12,
+        "weather": 21,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T17:45:00.000Z",
+      "score": 70.4,
+      "penalties": {
+        "transit": 10.9,
+        "wait": 11.4,
+        "weather": 20.7,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T18:00:00.000Z",
+      "score": 69.3,
+      "penalties": {
+        "transit": 11.4,
+        "wait": 10.9,
+        "weather": 20.4,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T18:15:00.000Z",
+      "score": 68.1,
+      "penalties": {
+        "transit": 11.9,
+        "wait": 10.3,
+        "weather": 20,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T18:30:00.000Z",
+      "score": 67,
+      "penalties": {
+        "transit": 12.5,
+        "wait": 9.8,
+        "weather": 19.6,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T18:45:00.000Z",
+      "score": 65.9,
+      "penalties": {
+        "transit": 13.2,
+        "wait": 9.4,
+        "weather": 19.1,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T19:00:00.000Z",
+      "score": 64.8,
+      "penalties": {
+        "transit": 13.8,
+        "wait": 9,
+        "weather": 18.7,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T19:15:00.000Z",
+      "score": 63.8,
+      "penalties": {
+        "transit": 14.5,
+        "wait": 8.6,
+        "weather": 18.2,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T19:30:00.000Z",
+      "score": 62.9,
+      "penalties": {
+        "transit": 15.1,
+        "wait": 8.4,
+        "weather": 17.7,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T19:45:00.000Z",
+      "score": 62,
+      "penalties": {
+        "transit": 15.8,
+        "wait": 8.2,
+        "weather": 17.2,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T20:00:00.000Z",
+      "score": 61.2,
+      "penalties": {
+        "transit": 16.3,
+        "wait": 8,
+        "weather": 16.7,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T20:15:00.000Z",
+      "score": 60.5,
+      "penalties": {
+        "transit": 16.8,
+        "wait": 8,
+        "weather": 16.2,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T20:30:00.000Z",
+      "score": 59.9,
+      "penalties": {
+        "transit": 17.3,
+        "wait": 8,
+        "weather": 15.7,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T20:45:00.000Z",
+      "score": 59.5,
+      "penalties": {
+        "transit": 17.6,
+        "wait": 8.2,
+        "weather": 15.2,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T21:00:00.000Z",
+      "score": 59.2,
+      "penalties": {
+        "transit": 17.8,
+        "wait": 8.4,
+        "weather": 14.8,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T21:15:00.000Z",
+      "score": 59,
+      "penalties": {
+        "transit": 18,
+        "wait": 8.6,
+        "weather": 14.4,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T21:30:00.000Z",
+      "score": 59,
+      "penalties": {
+        "transit": 18,
+        "wait": 9,
+        "weather": 13.9,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T21:45:00.000Z",
+      "score": 59.1,
+      "penalties": {
+        "transit": 17.9,
+        "wait": 9.4,
+        "weather": 13.6,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T22:00:00.000Z",
+      "score": 59.4,
+      "penalties": {
+        "transit": 17.7,
+        "wait": 9.8,
+        "weather": 13.2,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T22:15:00.000Z",
+      "score": 59.8,
+      "penalties": {
+        "transit": 17.4,
+        "wait": 10.3,
+        "weather": 12.9,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T22:30:00.000Z",
+      "score": 60.3,
+      "penalties": {
+        "transit": 17,
+        "wait": 10.9,
+        "weather": 12.6,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T22:45:00.000Z",
+      "score": 60.9,
+      "penalties": {
+        "transit": 16.5,
+        "wait": 11.4,
+        "weather": 12.4,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T23:00:00.000Z",
+      "score": 61.7,
+      "penalties": {
+        "transit": 16,
+        "wait": 12,
+        "weather": 12.2,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T23:15:00.000Z",
+      "score": 62.5,
+      "penalties": {
+        "transit": 15.4,
+        "wait": 12.6,
+        "weather": 12.1,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T23:30:00.000Z",
+      "score": 63.4,
+      "penalties": {
+        "transit": 14.7,
+        "wait": 13.1,
+        "weather": 12,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-23T23:45:00.000Z",
+      "score": 64.4,
+      "penalties": {
+        "transit": 14.1,
+        "wait": 13.7,
+        "weather": 12,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T00:00:00.000Z",
+      "score": 65.5,
+      "penalties": {
+        "transit": 13.4,
+        "wait": 14.2,
+        "weather": 12,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T00:15:00.000Z",
+      "score": 66.6,
+      "penalties": {
+        "transit": 12.8,
+        "wait": 14.6,
+        "weather": 12.1,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T00:30:00.000Z",
+      "score": 67.7,
+      "penalties": {
+        "transit": 12.2,
+        "wait": 15,
+        "weather": 12.2,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T00:45:00.000Z",
+      "score": 68.8,
+      "penalties": {
+        "transit": 11.6,
+        "wait": 15.4,
+        "weather": 12.4,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T01:00:00.000Z",
+      "score": 69.9,
+      "penalties": {
+        "transit": 11.1,
+        "wait": 15.6,
+        "weather": 12.6,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T01:15:00.000Z",
+      "score": 71,
+      "penalties": {
+        "transit": 10.7,
+        "wait": 15.8,
+        "weather": 12.8,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T01:30:00.000Z",
+      "score": 72.1,
+      "penalties": {
+        "transit": 10.4,
+        "wait": 16,
+        "weather": 13.1,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T01:45:00.000Z",
+      "score": 73,
+      "penalties": {
+        "transit": 10.1,
+        "wait": 16,
+        "weather": 13.5,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T02:00:00.000Z",
+      "score": 73.9,
+      "penalties": {
+        "transit": 10,
+        "wait": 16,
+        "weather": 13.8,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T02:15:00.000Z",
+      "score": 74.7,
+      "penalties": {
+        "transit": 10,
+        "wait": 15.8,
+        "weather": 14.2,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T02:30:00.000Z",
+      "score": 75.4,
+      "penalties": {
+        "transit": 10.1,
+        "wait": 15.6,
+        "weather": 14.7,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T02:45:00.000Z",
+      "score": 76,
+      "penalties": {
+        "transit": 10.3,
+        "wait": 15.4,
+        "weather": 15.1,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T03:00:00.000Z",
+      "score": 76.4,
+      "penalties": {
+        "transit": 10.6,
+        "wait": 15,
+        "weather": 15.6,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T03:15:00.000Z",
+      "score": 76.8,
+      "penalties": {
+        "transit": 11.1,
+        "wait": 14.6,
+        "weather": 16.1,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T03:30:00.000Z",
+      "score": 77,
+      "penalties": {
+        "transit": 11.5,
+        "wait": 14.2,
+        "weather": 16.6,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T03:45:00.000Z",
+      "score": 77,
+      "penalties": {
+        "transit": 12.1,
+        "wait": 13.6,
+        "weather": 17.1,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T04:00:00.000Z",
+      "score": 76.9,
+      "penalties": {
+        "transit": 12.7,
+        "wait": 13.1,
+        "weather": 17.6,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T04:15:00.000Z",
+      "score": 76.7,
+      "penalties": {
+        "transit": 13.4,
+        "wait": 12.6,
+        "weather": 18.1,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T04:30:00.000Z",
+      "score": 76.3,
+      "penalties": {
+        "transit": 14,
+        "wait": 12,
+        "weather": 18.6,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T04:45:00.000Z",
+      "score": 75.8,
+      "penalties": {
+        "transit": 14.7,
+        "wait": 11.4,
+        "weather": 19,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T05:00:00.000Z",
+      "score": 75.2,
+      "penalties": {
+        "transit": 15.3,
+        "wait": 10.9,
+        "weather": 19.5,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T05:15:00.000Z",
+      "score": 74.5,
+      "penalties": {
+        "transit": 15.9,
+        "wait": 10.3,
+        "weather": 19.9,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T05:30:00.000Z",
+      "score": 73.6,
+      "penalties": {
+        "transit": 16.5,
+        "wait": 9.8,
+        "weather": 20.3,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T05:45:00.000Z",
+      "score": 72.7,
+      "penalties": {
+        "transit": 17,
+        "wait": 9.4,
+        "weather": 20.6,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T06:00:00.000Z",
+      "score": 71.6,
+      "penalties": {
+        "transit": 17.4,
+        "wait": 9,
+        "weather": 21,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T06:15:00.000Z",
+      "score": 70.5,
+      "penalties": {
+        "transit": 17.7,
+        "wait": 8.6,
+        "weather": 21.3,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T06:30:00.000Z",
+      "score": 69.4,
+      "penalties": {
+        "transit": 17.9,
+        "wait": 8.4,
+        "weather": 21.5,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T06:45:00.000Z",
+      "score": 68.2,
+      "penalties": {
+        "transit": 18,
+        "wait": 8.2,
+        "weather": 21.7,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T07:00:00.000Z",
+      "score": 67,
+      "penalties": {
+        "transit": 18,
+        "wait": 8,
+        "weather": 21.8,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T07:15:00.000Z",
+      "score": 65.9,
+      "penalties": {
+        "transit": 17.9,
+        "wait": 8,
+        "weather": 21.9,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T07:30:00.000Z",
+      "score": 64.7,
+      "penalties": {
+        "transit": 17.6,
+        "wait": 8,
+        "weather": 22,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T07:45:00.000Z",
+      "score": 63.6,
+      "penalties": {
+        "transit": 17.3,
+        "wait": 8.2,
+        "weather": 22,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T08:00:00.000Z",
+      "score": 62.6,
+      "penalties": {
+        "transit": 16.9,
+        "wait": 8.4,
+        "weather": 21.9,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T08:15:00.000Z",
+      "score": 61.7,
+      "penalties": {
+        "transit": 16.4,
+        "wait": 8.6,
+        "weather": 21.8,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T08:30:00.000Z",
+      "score": 60.8,
+      "penalties": {
+        "transit": 15.8,
+        "wait": 9,
+        "weather": 21.7,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T08:45:00.000Z",
+      "score": 60,
+      "penalties": {
+        "transit": 15.2,
+        "wait": 9.4,
+        "weather": 21.5,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T09:00:00.000Z",
+      "score": 59.4,
+      "penalties": {
+        "transit": 14.5,
+        "wait": 9.9,
+        "weather": 21.3,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T09:15:00.000Z",
+      "score": 58.9,
+      "penalties": {
+        "transit": 13.9,
+        "wait": 10.4,
+        "weather": 21,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T09:30:00.000Z",
+      "score": 58.5,
+      "penalties": {
+        "transit": 13.2,
+        "wait": 10.9,
+        "weather": 20.7,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T09:45:00.000Z",
+      "score": 58.2,
+      "penalties": {
+        "transit": 12.6,
+        "wait": 11.5,
+        "weather": 20.3,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T10:00:00.000Z",
+      "score": 58.1,
+      "penalties": {
+        "transit": 12,
+        "wait": 12,
+        "weather": 19.9,
+        "air": 0
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T10:15:00.000Z",
+      "score": 58.1,
+      "penalties": {
+        "transit": 11.4,
+        "wait": 12.6,
+        "weather": 19.5,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T10:30:00.000Z",
+      "score": 58.3,
+      "penalties": {
+        "transit": 11,
+        "wait": 13.1,
+        "weather": 19.1,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T10:45:00.000Z",
+      "score": 58.6,
+      "penalties": {
+        "transit": 10.6,
+        "wait": 13.7,
+        "weather": 18.6,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T11:00:00.000Z",
+      "score": 59,
+      "penalties": {
+        "transit": 10.3,
+        "wait": 14.2,
+        "weather": 18.1,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T11:15:00.000Z",
+      "score": 59.6,
+      "penalties": {
+        "transit": 10.1,
+        "wait": 14.6,
+        "weather": 17.6,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T11:30:00.000Z",
+      "score": 60.2,
+      "penalties": {
+        "transit": 10,
+        "wait": 15,
+        "weather": 17.1,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T11:45:00.000Z",
+      "score": 61,
+      "penalties": {
+        "transit": 10,
+        "wait": 15.4,
+        "weather": 16.6,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T21:04:47.842Z",
+      "score": 53.6,
+      "penalties": {
+        "transit": 15,
+        "wait": 15,
+        "weather": 8,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T21:05:07.658Z",
+      "score": 81.1,
+      "penalties": {
+        "transit": 2.5,
+        "wait": 0,
+        "weather": 8,
+        "air": 10
+      }
+    },
+    {
+      "tsUtc": "2026-02-24T21:35:30.633Z",
+      "score": 82.49,
+      "penalties": {
+        "transit": 1.11,
+        "wait": 0,
+        "weather": 8,
+        "air": 10
+      }
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/liveability.schema.json",
+  "type": "object",
+  "required": ["project", "location", "sources", "scoring"],
+  "additionalProperties": false,
+  "properties": {
+    "project": {
+      "type": "object",
+      "required": ["name", "timezone", "historyRetentionDays", "collectionIntervalMinutes"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "timezone": { "type": "string", "minLength": 1 },
+        "historyRetentionDays": { "type": "integer", "minimum": 1, "maximum": 30 },
+        "collectionIntervalMinutes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "location": {
+      "type": "object",
+      "required": ["name", "lat", "lon"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "lat": { "type": "number", "minimum": -90, "maximum": 90 },
+        "lon": { "type": "number", "minimum": -180, "maximum": 180 }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "required": ["tfl", "openMeteo", "ergAirQuality", "fhrs"],
+      "additionalProperties": false,
+      "properties": {
+        "tfl": {
+          "type": "object",
+          "required": ["enabled", "baseUrl", "appIdEnv", "appKeyEnv", "modes", "watchLines", "stopPoints"],
+          "additionalProperties": false,
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "baseUrl": { "type": "string", "format": "uri" },
+            "appIdEnv": { "type": "string", "minLength": 1 },
+            "appKeyEnv": { "type": "string", "minLength": 1 },
+            "modes": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+            "watchLines": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+            "stopPoints": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "label"],
+                "additionalProperties": false,
+                "properties": {
+                  "id": { "type": "string", "minLength": 1 },
+                  "label": { "type": "string", "minLength": 1 }
+                }
+              }
+            }
+          }
+        },
+        "openMeteo": {
+          "type": "object",
+          "required": ["enabled", "baseUrl", "forecastHours", "hourlyVariables"],
+          "additionalProperties": false,
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "baseUrl": { "type": "string", "format": "uri" },
+            "forecastHours": { "type": "integer", "minimum": 1, "maximum": 240 },
+            "hourlyVariables": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+          }
+        },
+        "ergAirQuality": {
+          "type": "object",
+          "required": ["enabled", "baseUrl", "groupName"],
+          "additionalProperties": false,
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "baseUrl": { "type": "string", "format": "uri" },
+            "groupName": { "type": "string", "minLength": 1 }
+          }
+        },
+        "fhrs": {
+          "type": "object",
+          "required": ["enabled", "baseUrl", "apiVersionHeader", "localAuthorityIds"],
+          "additionalProperties": false,
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "baseUrl": { "type": "string", "format": "uri" },
+            "apiVersionHeader": { "type": "integer", "minimum": 1 },
+            "localAuthorityIds": { "type": "array", "items": { "type": "integer" } }
+          }
+        }
+      }
+    },
+    "scoring": {
+      "type": "object",
+      "required": ["weights", "fallbacks", "transitSeverityPoints", "waitPenaltyBands", "weatherPenalty", "airPenalty"],
+      "additionalProperties": false,
+      "properties": {
+        "weights": {
+          "type": "object",
+          "required": ["transit", "wait", "weather", "air"],
+          "additionalProperties": false,
+          "properties": {
+            "transit": { "type": "number", "minimum": 0 },
+            "wait": { "type": "number", "minimum": 0 },
+            "weather": { "type": "number", "minimum": 0 },
+            "air": { "type": "number", "minimum": 0 }
+          }
+        },
+        "fallbacks": {
+          "type": "object",
+          "required": ["transitPenalty", "waitPenalty", "weatherPenalty", "airPenalty"],
+          "additionalProperties": false,
+          "properties": {
+            "transitPenalty": { "type": "number", "minimum": 0 },
+            "waitPenalty": { "type": "number", "minimum": 0 },
+            "weatherPenalty": { "type": "number", "minimum": 0 },
+            "airPenalty": { "type": "number", "minimum": 0 }
+          }
+        },
+        "transitSeverityPoints": {
+          "type": "object",
+          "required": ["goodService", "minorDelays", "severeDelays", "partSuspended", "suspended", "unknown"],
+          "additionalProperties": false,
+          "properties": {
+            "goodService": { "type": "number", "minimum": 0 },
+            "minorDelays": { "type": "number", "minimum": 0 },
+            "severeDelays": { "type": "number", "minimum": 0 },
+            "partSuspended": { "type": "number", "minimum": 0 },
+            "suspended": { "type": "number", "minimum": 0 },
+            "unknown": { "type": "number", "minimum": 0 }
+          }
+        },
+        "waitPenaltyBands": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["maxMinutes", "penalty"],
+            "additionalProperties": false,
+            "properties": {
+              "maxMinutes": { "type": "number", "minimum": 0 },
+              "penalty": { "type": "number", "minimum": 0 }
+            }
+          }
+        },
+        "weatherPenalty": {
+          "type": "object",
+          "required": ["rainBands", "tempComfort", "windBands"],
+          "additionalProperties": false,
+          "properties": {
+            "rainBands": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["maxProb", "penalty"],
+                "additionalProperties": false,
+                "properties": {
+                  "maxProb": { "type": "number", "minimum": 0, "maximum": 100 },
+                  "penalty": { "type": "number", "minimum": 0 }
+                }
+              }
+            },
+            "tempComfort": {
+              "type": "object",
+              "required": ["idealMin", "idealMax", "shoulderMin", "shoulderMax", "shoulderPenalty", "extremePenalty"],
+              "additionalProperties": false,
+              "properties": {
+                "idealMin": { "type": "number" },
+                "idealMax": { "type": "number" },
+                "shoulderMin": { "type": "number" },
+                "shoulderMax": { "type": "number" },
+                "shoulderPenalty": { "type": "number", "minimum": 0 },
+                "extremePenalty": { "type": "number", "minimum": 0 }
+              }
+            },
+            "windBands": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["maxSpeed", "penalty"],
+                "additionalProperties": false,
+                "properties": {
+                  "maxSpeed": { "type": "number", "minimum": 0 },
+                  "penalty": { "type": "number", "minimum": 0 }
+                }
+              }
+            }
+          }
+        },
+        "airPenalty": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["maxIndex", "penalty", "band"],
+            "additionalProperties": false,
+            "properties": {
+              "maxIndex": { "type": "integer", "minimum": 1, "maximum": 10 },
+              "penalty": { "type": "number", "minimum": 0 },
+              "band": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    }
+  }
+}
