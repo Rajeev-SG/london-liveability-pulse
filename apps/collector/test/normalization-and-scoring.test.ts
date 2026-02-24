@@ -60,4 +60,34 @@ describe('normalization and scoring', () => {
     const result = computeLiveabilityScore({ transit: 10, wait: 20, weather: 56, air: 10 }, config);
     expect(result.score).toBe(15.2);
   });
+
+  it('parses ERG nested @AirQualityIndex values from Species arrays', () => {
+    const config = makeValidConfig();
+    const air = summarizeErgAirQuality(
+      {
+        HourlyAirQualityIndex: {
+          LocalAuthority: [
+            {
+              '@LocalAuthorityName': 'Test Borough',
+              Site: [
+                {
+                  '@SiteName': 'Test Site',
+                  Species: [
+                    { '@SpeciesCode': 'NO2', '@AirQualityIndex': '2', '@AirQualityBand': 'Low' },
+                    { '@SpeciesCode': 'PM10', '@AirQualityIndex': '5', '@AirQualityBand': 'Moderate' }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      config
+    );
+
+    expect(air.maxIndex).toBe(5);
+    expect(air.band).toBe('Moderate');
+    expect(air.stationName).toBe('Test Site');
+    expect(air.penalty).toBe(10);
+  });
 });

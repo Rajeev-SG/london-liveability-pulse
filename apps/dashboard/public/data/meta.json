@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "project": "London Liveability Pulse",
-  "buildTimeUtc": "2026-02-24T22:23:44.350Z",
-  "latestCollectedAtUtc": "2026-02-24T22:23:43.261Z",
+  "buildTimeUtc": "2026-02-24T22:45:50.155Z",
+  "latestCollectedAtUtc": "2026-02-24T22:45:49.263Z",
   "timezone": "Europe/London",
   "sourceStatuses": {
     "tfl": "ok",
@@ -11,15 +11,15 @@
     "fhrs": "disabled"
   },
   "provenance": {
-    "generatedBy": "github-actions",
-    "gitCommitSha": "db6f38a8dc573793b19f128ed47c8a0f1dc1bb94",
-    "gitRef": "refs/heads/main",
-    "githubRunId": "22371307595",
-    "githubRunAttempt": "1",
-    "githubRepository": "Rajeev-SG/london-liveability-pulse",
-    "githubActor": "Rajeev-SG",
-    "workflowName": "Collect data + Deploy dashboard (GitHub Pages)",
-    "runUrl": "https://github.com/Rajeev-SG/london-liveability-pulse/actions/runs/22371307595",
+    "generatedBy": "local-cli",
+    "gitCommitSha": null,
+    "gitRef": null,
+    "githubRunId": null,
+    "githubRunAttempt": null,
+    "githubRepository": null,
+    "githubActor": null,
+    "workflowName": null,
+    "runUrl": null,
     "collectorVersion": "0.1.0",
     "sourcesRequested": {
       "tfl": true,

@@ -1,4 +1,5 @@
-import { Fragment, startTransition, useEffect, useId, useRef, useState } from 'react';
+import { Fragment, startTransition, useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import type { HistoryData, LatestData, LineageMetric, MetaData, Provenance } from './types.js';
 
@@ -55,8 +56,55 @@ function MetricLineagePopover({
   lineage: LineageMetric | undefined;
 }) {
   const [open, setOpen] = useState(false);
+  const [coords, setCoords] = useState<{ top: number; left: number; width: number; maxHeight: number } | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const closeTimerRef = useRef<number | null>(null);
   const panelId = useId();
+
+  const cancelClose = () => {
+    if (closeTimerRef.current != null) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+  const scheduleClose = () => {
+    cancelClose();
+    closeTimerRef.current = window.setTimeout(() => setOpen(false), 120);
+  };
+
+  const updatePosition = () => {
+    if (!open || !triggerRef.current) return;
+    const triggerRect = triggerRef.current.getBoundingClientRect();
+    const viewportW = window.innerWidth;
+    const viewportH = window.innerHeight;
+    const margin = 12;
+    const preferredWidth = Math.min(520, viewportW - margin * 2);
+    const panelHeight = panelRef.current?.offsetHeight ?? 380;
+    const spaceBelow = viewportH - triggerRect.bottom - margin;
+    const spaceAbove = triggerRect.top - margin;
+    const placeBelow = spaceBelow >= Math.min(panelHeight, 260) || spaceBelow >= spaceAbove;
+    const maxHeight = Math.max(180, Math.min(420, (placeBelow ? spaceBelow : spaceAbove) - 4));
+    let left = triggerRect.left;
+    left = Math.max(margin, Math.min(left, viewportW - preferredWidth - margin));
+    let top = placeBelow ? triggerRect.bottom + 8 : triggerRect.top - Math.min(panelHeight, maxHeight) - 8;
+    top = Math.max(margin, Math.min(top, viewportH - Math.min(panelHeight, maxHeight) - margin));
+    setCoords({ top, left, width: preferredWidth, maxHeight });
+  };
+
+  useLayoutEffect(() => {
+    if (!open) return;
+    updatePosition();
+    const onWindowChange = () => updatePosition();
+    window.addEventListener('resize', onWindowChange);
+    window.addEventListener('scroll', onWindowChange, true);
+    return () => {
+      window.removeEventListener('resize', onWindowChange);
+      window.removeEventListener('scroll', onWindowChange, true);
+    };
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -77,6 +125,7 @@ function MetricLineagePopover({
     document.addEventListener('mousedown', onPointerDown);
     document.addEventListener('keydown', onKeyDown);
     return () => {
+      cancelClose();
       document.removeEventListener('mousedown', onPointerDown);
       document.removeEventListener('keydown', onKeyDown);
     };
@@ -88,10 +137,18 @@ function MetricLineagePopover({
     <div
       ref={wrapperRef}
       className={`lineage-wrap ${open ? 'open' : ''}`}
-      onMouseEnter={() => setOpen(true)}
-      onFocus={() => setOpen(true)}
+      onMouseEnter={() => {
+        cancelClose();
+        setOpen(true);
+      }}
+      onFocus={() => {
+        cancelClose();
+        setOpen(true);
+      }}
+      onMouseLeave={scheduleClose}
     >
       <button
+        ref={triggerRef}
         type="button"
         className="lineage-trigger"
         aria-label={`Explain ${label} metric lineage`}
@@ -102,7 +159,28 @@ function MetricLineagePopover({
       >
         How calculated
       </button>
-      <div className="lineage-popover" id={panelId} role="dialog" aria-label={`${label} data lineage`}>
+      {open && typeof document !== 'undefined' ? createPortal(
+        <div
+          ref={panelRef}
+          className="lineage-popover"
+          id={panelId}
+          role="dialog"
+          aria-label={`${label} data lineage`}
+          aria-modal="false"
+          data-testid={`lineage-popover-${metricKey}`}
+          style={
+            coords
+              ? {
+                  top: `${coords.top}px`,
+                  left: `${coords.left}px`,
+                  width: `${coords.width}px`,
+                  maxHeight: `${coords.maxHeight}px`
+                }
+              : undefined
+          }
+          onMouseEnter={cancelClose}
+          onMouseLeave={scheduleClose}
+        >
           <div className="lineage-header">
             <strong>{lineage.label}</strong>
             <div className="lineage-badges">
@@ -176,7 +254,9 @@ function MetricLineagePopover({
               <p>{lineage.fallbackReason ?? 'Fallback path was used.'}</p>
             </div>
           ) : null}
-      </div>
+        </div>,
+        document.body
+      ) : null}
     </div>
   );
 }

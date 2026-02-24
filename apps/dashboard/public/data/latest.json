@@ -1,72 +1,72 @@
 {
   "schemaVersion": 1,
   "project": "London Liveability Pulse",
-  "collectedAtUtc": "2026-02-24T22:23:43.261Z",
-  "collectedAtLocal": "24 Feb 2026, 22:23:43",
+  "collectedAtUtc": "2026-02-24T22:45:49.263Z",
+  "collectedAtLocal": "24 Feb 2026, 22:45:49",
   "timezone": "Europe/London",
   "location": {
     "name": "Central London",
     "lat": 51.5074,
     "lon": -0.1278
   },
-  "liveabilityScore": 81.66,
+  "liveabilityScore": 86.3,
   "penalties": {
-    "transit": 1.94,
-    "wait": 0,
+    "transit": 2.75,
+    "wait": 4.55,
     "weather": 8,
-    "air": 10,
-    "weightedTotal": 18.34
+    "air": 0,
+    "weightedTotal": 13.7
   },
   "kpis": {
     "transit": {
-      "penalty": 1.94,
-      "disruptedLines": 3,
-      "watchedLines": 18
+      "penalty": 2.75,
+      "disruptedLines": 4,
+      "watchedLines": 20
     },
     "wait": {
-      "penalty": 0,
-      "worstStopPoint": "Euston",
-      "medianMinutes": 1.9
+      "penalty": 4.55,
+      "worstStopPoint": "Stratford DLR",
+      "medianMinutes": 8.5
     },
     "weather": {
       "penalty": 8,
       "maxRainProbabilityNext6h": 0,
-      "maxWindSpeedNext6h": 7.5,
-      "representativeTempNext6h": 11.6
+      "maxWindSpeedNext6h": 7.9,
+      "representativeTempNext6h": 11.5
     },
     "air": {
-      "penalty": 10,
-      "maxIndex": null,
-      "band": null
+      "penalty": 0,
+      "maxIndex": 2,
+      "band": "Low"
     }
   },
   "whatChanged": {
     "topDisruptedLines": [
+      {
+        "line": "Mildmay",
+        "status": "Reduced Service",
+        "severityPoints": 15
+      },
       {
         "line": "Northern",
         "status": "Part Closure",
         "severityPoints": 15
       },
       {
-        "line": "Jubilee",
-        "status": "Minor Delays",
-        "severityPoints": 10
-      },
-      {
-        "line": "Piccadilly",
-        "status": "Minor Delays",
-        "severityPoints": 10
+        "line": "Tram",
+        "status": "Part Closure",
+        "severityPoints": 15
       }
     ],
     "worstStopPoint": {
-      "label": "Euston",
-      "medianMinutes": 1.9
+      "label": "Stratford DLR",
+      "medianMinutes": 8.5
     },
     "maxRainProbabilityNext6h": 0,
     "airQuality": {
-      "maxIndex": null,
-      "band": null,
-      "stationName": null
+      "maxIndex": 2,
+      "band": "Low",
+      "stationName": "Bexley - Slade Green"
     }
   },
   "details": {
@@ -101,6 +101,20 @@
           "severityPoints": 0
         },
         {
+          "id": "dlr",
+          "name": "DLR",
+          "mode": "dlr",
+          "status": "Good Service",
+          "severityPoints": 0
+        },
+        {
+          "id": "elizabeth",
+          "name": "Elizabeth line",
+          "mode": "elizabeth-line",
+          "status": "Good Service",
+          "severityPoints": 0
+        },
+        {
           "id": "hammersmith-city",
           "name": "Hammersmith & City",
           "mode": "tube",
@@ -110,41 +124,6 @@
         {
           "id": "jubilee",
           "name": "Jubilee",
-          "mode": "tube",
-          "status": "Minor Delays",
-          "severityPoints": 10
-        },
-        {
-          "id": "metropolitan",
-          "name": "Metropolitan",
-          "mode": "tube",
-          "status": "Good Service",
-          "severityPoints": 0
-        },
-        {
-          "id": "northern",
-          "name": "Northern",
-          "mode": "tube",
-          "status": "Part Closure",
-          "severityPoints": 15
-        },
-        {
-          "id": "piccadilly",
-          "name": "Piccadilly",
-          "mode": "tube",
-          "status": "Minor Delays",
-          "severityPoints": 10
-        },
-        {
-          "id": "victoria",
-          "name": "Victoria",
-          "mode": "tube",
-          "status": "Good Service",
-          "severityPoints": 0
-        },
-        {
-          "id": "waterloo-city",
-          "name": "Waterloo & City",
           "mode": "tube",
           "status": "Good Service",
           "severityPoints": 0
@@ -164,16 +143,58 @@
           "severityPoints": 0
         },
         {
+          "id": "metropolitan",
+          "name": "Metropolitan",
+          "mode": "tube",
+          "status": "Good Service",
+          "severityPoints": 0
+        },
+        {
           "id": "mildmay",
           "name": "Mildmay",
           "mode": "overground",
-          "status": "Good Service",
-          "severityPoints": 0
+          "status": "Reduced Service",
+          "severityPoints": 15
+        },
+        {
+          "id": "northern",
+          "name": "Northern",
+          "mode": "tube",
+          "status": "Part Closure",
+          "severityPoints": 15
+        },
+        {
+          "id": "piccadilly",
+          "name": "Piccadilly",
+          "mode": "tube",
+          "status": "Minor Delays",
+          "severityPoints": 10
         },
         {
           "id": "suffragette",
           "name": "Suffragette",
           "mode": "overground",
+          "status": "Good Service",
+          "severityPoints": 0
+        },
+        {
+          "id": "tram",
+          "name": "Tram",
+          "mode": "tram",
+          "status": "Part Closure",
+          "severityPoints": 15
+        },
+        {
+          "id": "victoria",
+          "name": "Victoria",
+          "mode": "tube",
+          "status": "Good Service",
+          "severityPoints": 0
+        },
+        {
+          "id": "waterloo-city",
+          "name": "Waterloo & City",
+          "mode": "tube",
           "status": "Good Service",
           "severityPoints": 0
         },
@@ -190,13 +211,6 @@
           "mode": "overground",
           "status": "Good Service",
           "severityPoints": 0
-        },
-        {
-          "id": "dlr",
-          "name": "DLR",
-          "mode": "dlr",
-          "status": "Good Service",
-          "severityPoints": 0
         }
       ],
       "arrivals": [
@@ -204,7 +218,40 @@
           "stopPointId": "940GZZLUKSX",
           "label": "King's Cross St Pancras",
           "nextArrivalsMinutes": [
-            0.5,
+            1.4,
+            1.4,
+            1.9
+          ],
+          "medianMinutes": 1.4,
+          "penalty": 0
+        },
+        {
+          "stopPointId": "940GZZLUEUS",
+          "label": "Euston",
+          "nextArrivalsMinutes": [
+            0.4,
+            1.4,
+            1.9
+          ],
+          "medianMinutes": 1.4,
+          "penalty": 0
+        },
+        {
+          "stopPointId": "940GZZLUWLO",
+          "label": "Waterloo Underground",
+          "nextArrivalsMinutes": [
+            0,
+            0.2,
+            0.7
+          ],
+          "medianMinutes": 0.2,
+          "penalty": 0
+        },
+        {
+          "stopPointId": "940GZZLUVIC",
+          "label": "Victoria Underground",
+          "nextArrivalsMinutes": [
+            0.9,
             0.9,
             1.4
           ],
@@ -212,15 +259,81 @@
           "penalty": 0
         },
         {
-          "stopPointId": "940GZZLUEUS",
-          "label": "Euston",
+          "stopPointId": "940GZZLUBNK",
+          "label": "Bank Underground",
           "nextArrivalsMinutes": [
-            1.4,
-            1.9,
-            2.4
+            0.4,
+            0.4,
+            1.9
           ],
-          "medianMinutes": 1.9,
+          "medianMinutes": 0.4,
           "penalty": 0
+        },
+        {
+          "stopPointId": "940GZZLULNB",
+          "label": "London Bridge Underground",
+          "nextArrivalsMinutes": [
+            2.4,
+            6.4,
+            9.4
+          ],
+          "medianMinutes": 6.4,
+          "penalty": 10
+        },
+        {
+          "stopPointId": "940GZZLUPAC",
+          "label": "Paddington Underground",
+          "nextArrivalsMinutes": [
+            1.2,
+            3.2,
+            6.7
+          ],
+          "medianMinutes": 3.2,
+          "penalty": 10
+        },
+        {
+          "stopPointId": "940GZZLUCYF",
+          "label": "Canary Wharf Underground",
+          "nextArrivalsMinutes": [
+            0.4,
+            2.4,
+            4.4
+          ],
+          "medianMinutes": 2.4,
+          "penalty": 0
+        },
+        {
+          "stopPointId": "940GZZLUSTD",
+          "label": "Stratford Underground",
+          "nextArrivalsMinutes": [
+            0.7,
+            1.7,
+            3.7
+          ],
+          "medianMinutes": 1.7,
+          "penalty": 0
+        },
+        {
+          "stopPointId": "940GZZDLSTD",
+          "label": "Stratford DLR",
+          "nextArrivalsMinutes": [
+            2.4,
+            8.5,
+            9.5
+          ],
+          "medianMinutes": 8.5,
+          "penalty": 20
+        },
+        {
+          "stopPointId": "910GSTFD",
+          "label": "Stratford Elizabeth / Rail",
+          "nextArrivalsMinutes": [
+            1.3,
+            3.4,
+            6.4
+          ],
+          "medianMinutes": 3.4,
+          "penalty": 10
         }
       ]
     },
@@ -235,12 +348,12 @@
           "2026-02-25T03:00"
         ],
         "temperature_2m": [
-          11.6,
           11.5,
           11.3,
-          11,
-          10.7,
-          10.5
+          11.1,
+          10.8,
+          10.6,
+          10.4
         ],
         "precipitation_probability": [
           0,
@@ -251,27 +364,27 @@
           0
         ],
         "wind_speed_10m": [
-          6.2,
-          6.7,
-          6.7,
-          7.2,
-          7.5,
-          7.3
+          7.6,
+          7.9,
+          6.8,
+          6.9,
+          6.6,
+          5.8
         ]
       },
       "maxRainProbability": 0,
-      "representativeTemp": 11.6,
-      "maxWindSpeed": 7.5,
+      "representativeTemp": 11.5,
+      "maxWindSpeed": 7.9,
       "rainPenalty": 0,
       "tempPenalty": 8,
       "windPenalty": 0,
       "penalty": 8
     },
     "airQuality": {
-      "maxIndex": null,
-      "band": null,
-      "penalty": 10,
-      "stationName": null
+      "maxIndex": 2,
+      "band": "Low",
+      "penalty": 0,
+      "stationName": "Bexley - Slade Green"
     }
   },
   "sourceStatuses": {
@@ -281,15 +394,15 @@
     "fhrs": "disabled"
   },
   "provenance": {
-    "generatedBy": "github-actions",
-    "gitCommitSha": "db6f38a8dc573793b19f128ed47c8a0f1dc1bb94",
-    "gitRef": "refs/heads/main",
-    "githubRunId": "22371307595",
-    "githubRunAttempt": "1",
-    "githubRepository": "Rajeev-SG/london-liveability-pulse",
-    "githubActor": "Rajeev-SG",
-    "workflowName": "Collect data + Deploy dashboard (GitHub Pages)",
-    "runUrl": "https://github.com/Rajeev-SG/london-liveability-pulse/actions/runs/22371307595",
+    "generatedBy": "local-cli",
+    "gitCommitSha": null,
+    "gitRef": null,
+    "githubRunId": null,
+    "githubRunAttempt": null,
+    "githubRepository": null,
+    "githubActor": null,
+    "workflowName": null,
+    "runUrl": null,
     "collectorVersion": "0.1.0",
     "sourcesRequested": {
       "tfl": true,
@@ -299,7 +412,7 @@
     }
   },
   "lineage": {
-    "generatedAtUtc": "2026-02-24T22:23:43.261Z",
+    "generatedAtUtc": "2026-02-24T22:45:49.263Z",
     "metrics": {
       "liveabilityScore": {
         "label": "Liveability score",
@@ -329,19 +442,19 @@
           "scoring.weights.air"
         ],
         "outputs": {
-          "transitPenalty": 1.94,
-          "waitPenalty": 0,
+          "transitPenalty": 2.75,
+          "waitPenalty": 4.55,
           "weatherPenalty": 8,
-          "airPenalty": 10,
+          "airPenalty": 0,
           "weightTransit": 1,
           "weightWait": 1,
           "weightWeather": 0.8,
           "weightAir": 1,
-          "weightedTotal": 18.34,
-          "score": 81.66
+          "weightedTotal": 13.7,
+          "score": 86.3
         },
-        "fallbackUsed": true,
-        "fallbackReason": "ERG air quality returned no parseable AQI values; using scoring.fallbacks.airPenalty=10"
+        "fallbackUsed": false,
+        "fallbackReason": null
       },
       "transit": {
         "label": "Transit disruption",
@@ -353,32 +466,8 @@
           {
             "source": "tfl",
             "method": "GET",
-            "url": "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status?app_key=REDACTED",
+            "url": "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,elizabeth-line,tram/status",
             "note": "Combined line status request by mode"
-          },
-          {
-            "source": "tfl",
-            "method": "GET",
-            "url": "https://api.tfl.gov.uk/line/mode/tube/status?app_key=REDACTED",
-            "note": "Fallback line status request for mode=tube"
-          },
-          {
-            "source": "tfl",
-            "method": "GET",
-            "url": "https://api.tfl.gov.uk/line/mode/overground/status?app_key=REDACTED",
-            "note": "Fallback line status request for mode=overground"
-          },
-          {
-            "source": "tfl",
-            "method": "GET",
-            "url": "https://api.tfl.gov.uk/line/mode/dlr/status?app_key=REDACTED",
-            "note": "Fallback line status request for mode=dlr"
-          },
-          {
-            "source": "tfl",
-            "method": "GET",
-            "url": "https://api.tfl.gov.uk/line/mode/tflrail/status?app_key=REDACTED",
-            "note": "Fallback line status request for mode=tflrail"
           }
         ],
         "ingestion": [
@@ -401,9 +490,9 @@
           "scoring.fallbacks.transitPenalty"
         ],
         "outputs": {
-          "watchedLines": 18,
-          "disruptedLines": 3,
-          "penalty": 1.94
+          "watchedLines": 20,
+          "disruptedLines": 4,
+          "penalty": 2.75
         },
         "fallbackUsed": false,
         "fallbackReason": null
@@ -418,14 +507,68 @@
           {
             "source": "tfl",
             "method": "GET",
-            "url": "https://api.tfl.gov.uk/StopPoint/940GZZLUKSX/arrivals?app_key=REDACTED",
+            "url": "https://api.tfl.gov.uk/StopPoint/940GZZLUKSX/arrivals",
             "note": "Arrivals request for stopPointId=940GZZLUKSX"
           },
           {
             "source": "tfl",
             "method": "GET",
-            "url": "https://api.tfl.gov.uk/StopPoint/940GZZLUEUS/arrivals?app_key=REDACTED",
+            "url": "https://api.tfl.gov.uk/StopPoint/940GZZLUEUS/arrivals",
             "note": "Arrivals request for stopPointId=940GZZLUEUS"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/StopPoint/940GZZLUWLO/arrivals",
+            "note": "Arrivals request for stopPointId=940GZZLUWLO"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/StopPoint/940GZZLUVIC/arrivals",
+            "note": "Arrivals request for stopPointId=940GZZLUVIC"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/StopPoint/940GZZLUBNK/arrivals",
+            "note": "Arrivals request for stopPointId=940GZZLUBNK"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/StopPoint/940GZZLULNB/arrivals",
+            "note": "Arrivals request for stopPointId=940GZZLULNB"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/StopPoint/940GZZLUPAC/arrivals",
+            "note": "Arrivals request for stopPointId=940GZZLUPAC"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/StopPoint/940GZZLUCYF/arrivals",
+            "note": "Arrivals request for stopPointId=940GZZLUCYF"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/StopPoint/940GZZLUSTD/arrivals",
+            "note": "Arrivals request for stopPointId=940GZZLUSTD"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/StopPoint/940GZZDLSTD/arrivals",
+            "note": "Arrivals request for stopPointId=940GZZDLSTD"
+          },
+          {
+            "source": "tfl",
+            "method": "GET",
+            "url": "https://api.tfl.gov.uk/StopPoint/910GSTFD/arrivals",
+            "note": "Arrivals request for stopPointId=910GSTFD"
           }
         ],
         "ingestion": [
@@ -447,11 +590,11 @@
           "scoring.fallbacks.waitPenalty"
         ],
         "outputs": {
-          "watchedStops": 2,
-          "stopsWithArrivals": 2,
-          "worstStopPoint": "Euston",
-          "worstMedianMinutes": 1.9,
-          "penalty": 0
+          "watchedStops": 11,
+          "stopsWithArrivals": 11,
+          "worstStopPoint": "Stratford DLR",
+          "worstMedianMinutes": 8.5,
+          "penalty": 4.55
         },
         "fallbackUsed": false,
         "fallbackReason": null
@@ -497,8 +640,8 @@
         ],
         "outputs": {
           "maxRainProbability": 0,
-          "representativeTemp": 11.6,
-          "maxWindSpeed": 7.5,
+          "representativeTemp": 11.5,
+          "maxWindSpeed": 7.9,
           "rainPenalty": 0,
           "tempPenalty": 8,
           "windPenalty": 0,
@@ -531,7 +674,7 @@
         ],
         "calculation": [
           "Map max AQI to penalty + band using config.scoring.airPenalty.",
-          "Fallback penalty may use config.scoring.fallbacks.airPenalty (10) when no parseable AQI exists."
+          "P_air = configured penalty for the matched AQI band."
         ],
         "configReferences": [
           "sources.ergAirQuality.groupName",
@@ -539,13 +682,13 @@
           "scoring.fallbacks.airPenalty"
         ],
         "outputs": {
-          "maxIndex": null,
-          "band": null,
-          "stationName": null,
-          "penalty": 10
+          "maxIndex": 2,
+          "band": "Low",
+          "stationName": "Bexley - Slade Green",
+          "penalty": 0
         },
-        "fallbackUsed": true,
-        "fallbackReason": "ERG air quality returned no parseable AQI values; using scoring.fallbacks.airPenalty=10"
+        "fallbackUsed": false,
+        "fallbackReason": null
       }
     }
   },

@@ -15,5 +15,6 @@ test('renders liveability dashboard from static JSON', async ({ page }) => {
   const transitLineage = page.getByLabel('Transit disruption data lineage');
   await expect(transitLineage.getByText('API query')).toBeVisible();
   await expect(transitLineage.getByText('Calculation')).toBeVisible();
-  await expect(transitLineage.getByText(/GET https:\/\/api\.tfl\.gov\.uk\/line\/mode\/.*app_key=REDACTED/).first()).toBeVisible();
+  const tflLineStatusQuery = transitLineage.getByText(/GET https:\/\/api\.tfl\.gov\.uk\/line\/mode\/.*\/status/).first();
+  await expect(tflLineStatusQuery).toBeVisible();
 });

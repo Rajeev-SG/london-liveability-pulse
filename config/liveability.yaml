@@ -15,13 +15,33 @@ sources:
     baseUrl: "https://api.tfl.gov.uk"
     appIdEnv: "TFL_APP_ID"
     appKeyEnv: "TFL_APP_KEY"
-    modes: ["tube", "overground", "dlr", "tflrail"]
+    # Status collection uses all returned lines for these modes (unless watchLines is set).
+    # "elizabeth-line" is the current mode name (replaces legacy "tflrail").
+    modes: ["tube", "overground", "dlr", "elizabeth-line", "tram"]
     watchLines: [] # empty => use all lines returned for these modes
     stopPoints:
       - id: "940GZZLUKSX"
         label: "King's Cross St Pancras"
       - id: "940GZZLUEUS"
         label: "Euston"
+      - id: "940GZZLUWLO"
+        label: "Waterloo Underground"
+      - id: "940GZZLUVIC"
+        label: "Victoria Underground"
+      - id: "940GZZLUBNK"
+        label: "Bank Underground"
+      - id: "940GZZLULNB"
+        label: "London Bridge Underground"
+      - id: "940GZZLUPAC"
+        label: "Paddington Underground"
+      - id: "940GZZLUCYF"
+        label: "Canary Wharf Underground"
+      - id: "940GZZLUSTD"
+        label: "Stratford Underground"
+      - id: "940GZZDLSTD"
+        label: "Stratford DLR"
+      - id: "910GSTFD"
+        label: "Stratford Elizabeth / Rail"
 
   openMeteo:
     enabled: true

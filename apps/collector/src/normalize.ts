@@ -95,7 +95,7 @@ export function summarizeErgAirQuality(raw: unknown, config: LiveabilityConfig):
           ? obj['SiteName']
           : currentStation;
 
-      const candidates = [obj['@AQI'], obj['AQI'], obj['AQIIndex'], obj['AirQualityIndex']];
+      const candidates = [obj['@AQI'], obj['AQI'], obj['AQIIndex'], obj['AirQualityIndex'], obj['@AirQualityIndex']];
       for (const candidate of candidates) {
         const value = Number(candidate);
         if (Number.isInteger(value) && value >= 1 && value <= 10) {
